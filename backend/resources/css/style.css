@@ -1,0 +1,619 @@
+html, body {
+    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background: white;
+    color: white;
+    padding: 15px;
+    width: 100vw;
+}
+
+#header-container {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: #555; 
+    z-index: 1000;
+}
+
+body > *:not(header):not(footer) {
+    flex: 1;
+}
+
+footer {
+    background: #333;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+
+/* For header.php */
+nav a {
+    margin: 0 1vw;
+    width: 10vw;
+}
+
+.navbar {
+    width: 100%;
+    padding: 2vh 6vw;
+    background-color: #fff;
+    height: 15vh;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 4vh;
+}
+
+
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-title {
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #000;
+    text-decoration: none;
+    letter-spacing: 0.2vw;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    padding: 0;
+    gap: 3vw;
+    height: 100%;
+    align-items: center;
+}
+
+.nav-menu li a {
+    color: #000;
+    text-decoration: none;
+    font-size: 1.5vw;
+    font-weight: bold;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-menu li a:hover {
+    color: #666;
+}
+
+
+/* For 401.php */
+.error-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.error401_h1 {
+    font-size: clamp(100px, 20vw, 250px);
+    color: #cccccc;
+    text-align: center;
+    margin-bottom: clamp(10px, 2vw, 30px);
+}
+
+.error401_h2 {
+    font-size: clamp(40px, 8vw, 100px);
+    margin-bottom: clamp(5px, 1vw, 10px);
+    text-align: center;
+}
+
+.error401_p {
+    font-size: clamp(24px, 4vw, 50px);
+    margin-top: clamp(5px, 1vw, 10px);
+    text-align: center;
+}
+
+.error401_btn_container {
+    text-align: center;
+    margin-top: clamp(30px, 5vw, 100px);
+    margin-bottom: clamp(30px, 5vw, 100px);
+}
+
+.error401_btn {
+    font-weight: bold !important;
+    padding: clamp(10px, 2vw, 15px) clamp(20px, 3vw, 30px) !important;
+    font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/* For landing.php */
+.landing_h1 {
+    font-size: 200px;
+    text-align: center;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.landing_btn_container {
+    text-align: center;
+    margin-top: clamp(130px, 20vh, 400px);
+    margin-bottom: clamp(30px, 5vw, 100px);
+}
+
+.landing_login_btn {
+    font-weight: bold !important;
+    padding: clamp(10px, 2vw, 15px) clamp(20px, 3vw, 30px) !important;
+    font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    transition: all 0.3s ease !important;
+    margin-right: clamp(30px, 6vw, 60px) !important;
+}
+
+.landing_signup_btn {
+    font-weight: bold !important;
+    padding: clamp(10px, 2vw, 15px) clamp(20px, 3vw, 30px) !important;
+    font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/* For login.php and signup.php */
+.logo_container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+
+.landing_logo_img {
+    width: clamp(100px, 15vw, 150px);
+    height: auto;
+}
+
+.signup_error_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(20px, 5vh, 40px);
+    margin-bottom: clamp(10px, 3vh, 20px);
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 100%;
+    padding: 0 clamp(10px, 2vw, 15px);
+}
+
+
+/* Login page styles */
+.login-wrapper {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.login_h1 {
+    font-size: clamp(40px, 7vw, 60px);
+    text-align: center;
+    margin-top: clamp(30px, 10vh, 50px);
+    margin-bottom: 20px;
+}
+
+.login_error_container {
+    width: 80%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.login_error_container div {
+    font-size: clamp(25px, 1.2vw, 16px);
+}
+
+.login-form-container {
+    width: 100%;
+    padding: 20px;
+}
+
+.login-form-container input {
+    padding: 12px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.login_btn_container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.txt_space {
+    padding-left: 4%;
+    padding-right: 4%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.login_login_btn,
+.login_signup_btn {
+    font-weight: bold !important;
+    padding: clamp(8px, 1.5vw, 12px) clamp(15px, 2vw, 25px) !important;
+    font-size: clamp(1rem, 1.5vw, 1.2rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/* For signup.php*/
+.signup_page_container {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+.login_h1 {
+    text-align: center;
+}
+
+.signup-form-container {
+    width: 100%;
+    padding: 30px;
+    font-size: 20px;
+}
+
+.signup_btn_container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.signup_create_btn {
+    font-weight: bold !important;
+    padding: clamp(10px, 1.5vw, 14px) clamp(18px, 2.2vw, 28px) !important;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+.signup_error_container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: clamp(20px, 5vh, 40px);
+    margin-bottom: clamp(10px, 3vh, 20px);
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 100%;
+    padding: 0 clamp(10px, 2vw, 15px);
+}
+
+.signup_error_container div{
+    width: 100%;
+    margin-bottom: clamp(3px, 1vh, 5px);
+    white-space: pre-wrap;
+    font-size: clamp(25px, 1.2vw, 16px);
+}
+
+
+/* For pending.php*/
+.pending_h1 {
+    font-size: clamp(30px, 5vw, 50px);
+    margin-top: clamp(100px, 20vh, 200px);
+    text-align: center;
+    justify-content: center;
+}
+.pending_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 0;
+}
+
+.approval_img {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    margin-top: -100px;
+}
+
+.pending_btn_container {
+    margin-top: -100px;
+    text-align: center;
+}
+
+.pending_main_btn {
+    font-weight: bold !important;
+    padding: clamp(10px, 1.5vw, 14px) clamp(18px, 2.2vw, 28px) !important;
+    font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/* For createArticle.php */
+.createArticle-form-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 15px auto;
+    padding: 40px;
+}
+
+.email_date_container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.email_date_container > div {
+    flex: 1;
+}
+
+.date-picker-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.date-picker-row > div {
+    flex: 1;
+}
+
+.form-control {
+    padding: 12px 15px;
+    font-size: 1.1rem;
+}
+
+textarea.form-control {
+    min-height: 300px !important;
+    padding: 15px;
+}
+
+.mb-31 {
+    margin-bottom: 30px !important;
+    font-weight: bold !important;
+}
+
+.createArticle_error_container {
+    width: 80%; 
+    max-width: 800px;
+    margin: clamp(30px, 5vh, 80px) auto -20px auto;
+    text-align: center;
+    word-wrap: break-word;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.createArticle_btn_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.createArticle_btn {
+    font-weight: bold !important;
+    padding: clamp(6px, 1vw, 10px) clamp(12px, 1.5vw, 20px) !important;
+    font-size: clamp(0.9rem, 1.2vw, 1.3rem) !important;
+    transition: all 0.3s ease !important;
+}
+
+
+/*index.php*/
+.articles-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.articles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-card {
+    width: calc(50% - 2vw);
+    margin-bottom: 2vw;
+    box-sizing: border-box;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+}
+
+.article-card .card-header {
+    flex-shrink: 0;
+    background-color: #f0f0f0;
+    padding: 1vw;
+    border-bottom: 1px solid none;
+    font-size: 1.2vw;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.article-card .card-body {
+    flex-grow: 1;
+    padding: 1vw;
+    font-size: 1vw;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.mainText {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+.cardButton {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    font-size: 0.9vw;
+        margin-top: auto;
+}
+.cardButton:hover {
+    color: #666; /* Almost black on hover */
+}
+
+
+/*article.php*/
+.main {
+    width: 60%;
+    margin: 40px auto;
+    background-color: #fff;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    padding: 40px;
+    background-size: 100% 1.2em;
+    line-height: 1.2em;
+}
+
+.index_h1 {
+    color: #222;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 15px;
+    letter-spacing: -1px;
+}
+
+.date {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 30px;
+    display: block;
+}
+
+.mainBody {
+    color: #333;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    word-break: break-word;
+    font-family: 'Georgia', serif;
+    font-size: 2rem;
+    padding-top: 20px;
+}
+
+
+/*profile.php*/
+.profileBody {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.headerContainer {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.mainProfile {
+    font-size: clamp(30px, 4vw, 45px);
+    margin-left: clamp(50px, 15%, 180px);
+    margin-top: clamp(40px, 10vh, 80px);
+}
+
+.subheader {
+    font-size: clamp(20px, 3vw, 30px);
+    margin-left: clamp(50px, 15%, 180px);
+}
+
+.profile_container {
+    width: clamp(80%, 90%, 1900px);
+    max-width: 1900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+}
+
+.profileTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 0;
+}
+
+.profileTable th {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: clamp(25px, 3.5vw, 40px);
+}
+
+.profileTable td {
+    text-align: center;
+    font-size: clamp(16px, 2.5vw, 25px);    
+    padding: 10px;
+}
+
+.dashboard-btn {
+    width: clamp(50px, 8vw, 60px);
+    height: clamp(25px, 4vh, 30px);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.link-button-edit {
+    color: #007bff;
+}
+
+.link-button-delete {
+    color: #dc3545;
+}
+
+.link-button-view {
+    color: #ffc107;
+}
+.btn.btn-outline-primary:hover .link-button-edit,
+.btn.btn-outline-danger:hover .link-button-delete,
+.btn.btn-outline-warning:hover .link-button-view {
+    color: white;
+}
+
+.dashboard-link {
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 30px;
+}
