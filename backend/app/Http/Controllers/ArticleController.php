@@ -12,47 +12,65 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::all();
+        $articles = Article::all();  // Fetch all articles from the database
+        return view('index', compact('articles'));  // Pass articles to the Blade view
     }
-
+    
     
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     request()->validate([
+    //         'ArticleId' => 'required',
+    //         'Title' => 'required',
+    //         'Body' => 'required',
+    //         'CreateDate' => 'required',
+    //         'StartDate' => 'required',
+    //         'EndDate' => 'required',
+    //         'ContributorUsername' => 'required'
+    //     ]);
+
+    //     Article::create([
+    //         'ArticleId' => request('ArticleId'),
+    //         'Title' => request('Title'),
+    //         'Body' => request('Body'),
+    //         'CreateDate' => request('CreateDate'),
+    //         'StartDate' => request('StartDate'),
+    //         'EndDate' => request('EndDate'),
+    //         'ContributorUsername' => request('ContributorUsername')
+
+
+    //     ]);
+
+
+    // }
     public function store(Request $request)
-    {
-        request()->validate([
-            'ArticleId' => 'required',
-            'Title' => 'required',
-            'Body' => 'required',
-            'CreateDate' => 'required',
-            'StartDate' => 'required',
-            'EndDate' => 'required',
-            'ContributorUsername' => 'required'
-        ]);
+{
+    $request->validate([
+        'Title' => 'required',
+        'Body' => 'required',
+        'CreateDate' => 'required|date',
+        'StartDate' => 'required|date',
+        'EndDate' => 'required|date',
+        'ContributorUsername' => 'required'
+    ]);
 
-        Article::create([
-            'ArticleId' => request('ArticleId'),
-            'Title' => request('Title'),
-            'Body' => request('Body'),
-            'CreateDate' => request('CreateDate'),
-            'StartDate' => request('StartDate'),
-            'EndDate' => request('EndDate'),
-            'ContributorUsername' => request('ContributorUsername')
+    Article::create($request->all());  // Insert into database
 
+    return redirect()->route('articles.index')->with('success', 'Article created successfully!');
+}
 
-        ]);
-
-
-    }
 
     /**
      * Display the specified resource.
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', compact('article'));  // Show a specific article
     }
+    
 
     /**
      * Show the form for editing the specified resource.
