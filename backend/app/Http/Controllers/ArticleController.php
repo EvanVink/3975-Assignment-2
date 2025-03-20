@@ -12,23 +12,38 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return Article::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'ArticleId' => 'required',
+            'Title' => 'required',
+            'Body' => 'required',
+            'CreateDate' => 'required',
+            'StartDate' => 'required',
+            'EndDate' => 'required',
+            'ContributorUsername' => 'required'
+        ]);
+
+        Article::create([
+            'ArticleId' => request('ArticleId'),
+            'Title' => request('Title'),
+            'Body' => request('Body'),
+            'CreateDate' => request('CreateDate'),
+            'StartDate' => request('StartDate'),
+            'EndDate' => request('EndDate'),
+            'ContributorUsername' => request('ContributorUsername')
+
+
+        ]);
+
+
     }
 
     /**
