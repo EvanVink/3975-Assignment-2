@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Article extends Model
 {
     use HasFactory;
+    protected $table = 'Article';
+    protected $primaryKey = "ArticleId";
     protected $fillable = [
         'ArticleId',
         'Title',

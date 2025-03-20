@@ -39,8 +39,6 @@ class ArticleController extends Controller
             'StartDate' => request('StartDate'),
             'EndDate' => request('EndDate'),
             'ContributorUsername' => request('ContributorUsername')
-
-
         ]);
 
 
@@ -49,9 +47,9 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show($ArticleId)
     {
-        //
+        return Article::find($ArticleId);
     }
 
     /**
