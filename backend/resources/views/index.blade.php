@@ -94,7 +94,7 @@
 
         <div class="landing_btn_container">
             <a href="{{ url('/login') }}" class="btn btn-secondary landing_login_btn">Login</a>
-            <a href="{{ url('/signup') }}" class="btn btn-secondary landing_signup_btn">Sign-up</a>
+            <a href="{{ url('/register') }}" class="btn btn-secondary landing_signup_btn">Sign-up</a>
         </div>
 
     @else
