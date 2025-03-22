@@ -2,64 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showLoginForm()
     {
-        //
+        return view('auth.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showRegisterForm()
     {
-        //
+        return view('auth.register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function login(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Retrieve user by email
+        $user = User::where('email', $request->email)->first();
+
+        if ($user && Hash::check($request->password, $user->password)) {
+            
+            if ($user->is_approved) { // Assuming `is_approved` exists in your `users` table
+                Auth::login($user);
+                Session::put('userName', $user->email);
+                Session::put('role', $user->role);
+                Session::put('name', $user->first_name . " " . $user->last_name);
+
+                // Redirect based on role
+                return ($user->role === 'admin') ? redirect('/admin/dashboard') : redirect('/');
+            } else {
+                return redirect('/pending');
+            }
+        } else {
+            return back()->withErrors(['email' => 'Invalid email or password.']);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
+
+    public function logout()
     {
-        //
+        Auth::logout();
+        Session::flush();
+        return redirect('/login');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
+    public function register(Request $request)
     {
-        //
-    }
+        // Validate user input
+        $validated = $request->validate([
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'regex:/[A-Z]/',  // Uppercase
+                'regex:/[a-z]/',  // Lowercase
+                'regex:/[0-9]/',  // Number
+                'regex:/[!@#$%^&*(),.?":{}|<>]/' // Special character
+            ]
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
+        // Create user and hash password
+        $user = User::create([
+            'first_name' => $validated['firstName'],
+            'last_name' => $validated['lastName'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'contributor', 
+            'is_approved' => 0
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        // Redirect to pending page
+        return redirect()->route('pending');
     }
 }

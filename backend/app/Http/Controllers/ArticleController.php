@@ -14,22 +14,49 @@ class ArticleController extends Controller
     {
         return Article::all();
     }
-
+    // $articles = Article::all();  // Fetch all articles from the database
+        // return view('index', compact('articles'));  // Pass articles to the Blade view
+    
     
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     request()->validate([
+    //         'ArticleId' => 'required',
+    //         'Title' => 'required',
+    //         'Body' => 'required',
+    //         'CreateDate' => 'required',
+    //         'StartDate' => 'required',
+    //         'EndDate' => 'required',
+    //         'ContributorUsername' => 'required'
+    //     ]);
+
+    //     Article::create([
+    //         'ArticleId' => request('ArticleId'),
+    //         'Title' => request('Title'),
+    //         'Body' => request('Body'),
+    //         'CreateDate' => request('CreateDate'),
+    //         'StartDate' => request('StartDate'),
+    //         'EndDate' => request('EndDate'),
+    //         'ContributorUsername' => request('ContributorUsername')
+
+
+    //     ]);
+
+
+    // }
     public function store(Request $request)
-    {
-        request()->validate([
-            'ArticleId' => 'required',
-            'Title' => 'required',
-            'Body' => 'required',
-            'CreateDate' => 'required',
-            'StartDate' => 'required',
-            'EndDate' => 'required',
-            'ContributorUsername' => 'required'
-        ]);
+{
+    $request->validate([
+        'Title' => 'required',
+        'Body' => 'required',
+        'CreateDate' => 'required|date',
+        'StartDate' => 'required|date',
+        'EndDate' => 'required|date',
+        'ContributorUsername' => 'required'
+    ]);
 
         Article::create([
             'ArticleId' => request('ArticleId'),
@@ -51,6 +78,7 @@ class ArticleController extends Controller
     {
         return Article::find($ArticleId);
     }
+    
 
     /**
      * Show the form for editing the specified resource.
