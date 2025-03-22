@@ -1,42 +1,207 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* 401 Unauthorized Page Styles */
+.error-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.error401_h1 {
+  font-size: clamp(100px, 20vw, 250px);
+  color: #cccccc;
+  text-align: center;
+  margin-bottom: clamp(10px, 2vw, 30px);
+}
+
+.error401_h2 {
+  font-size: clamp(40px, 8vw, 100px);
+  margin-bottom: clamp(5px, 1vw, 10px);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.error401_p {
+  font-size: clamp(24px, 4vw, 50px);
+  margin-top: clamp(5px, 1vw, 10px);
+  text-align: center;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.error401_btn_container {
+  text-align: center;
+  margin-top: clamp(30px, 5vw, 100px);
+  margin-bottom: clamp(30px, 5vw, 100px);
+}
+
+.error401_btn {
+  font-weight: bold !important;
+  padding: clamp(10px, 2vw, 15px) clamp(20px, 3vw, 30px) !important;
+  font-size: clamp(1.2rem, 2vw, 2rem) !important;
+  transition: all 0.3s ease !important;
+}
+
+
+/* Pending Page Styles */
+.pending-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.logo_container {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  padding: 20px;
+}
+
+.logo_img {
+  max-width: min(300px, 80%);
+  height: auto;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.pending_h1 {
+  font-size: clamp(30px, 5vw, 50px);
+  margin-top: 80px;
+  text-align: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.pending_container {
+  margin: 20px auto;
+  text-align: center;
+  width: 100%;
+}
+
+.approval_img {
+  max-width: 300px;
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.pending_btn_container {
+  text-align: center;
+  margin: 30px auto;
+  width: 100%;
+}
+
+.pending_main_btn {
+  font-weight: bold !important;
+  padding: clamp(10px, 1.5vw, 14px) clamp(18px, 2.2vw, 28px) !important;
+  font-size: clamp(1.1rem, 1.5vw, 1.5rem) !important;
+  transition: all 0.3s ease !important;
+}
+
+
+@media (max-width: 768px) {
+  .articles-grid {
+    width: 95%;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .article-card {
+    width: 100%;
+  }
+  
+  .main {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  .navbar {
+    height: auto;
+    padding: 10px;
+  }
+  
+  .blog-title {
+    font-size: 6vw;
+  }
+  
+  .nav-menu li a {
+    font-size: 4vw;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+/*ArticleList.tsx*/
+.articles-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.card {
-  padding: 2em;
+.articles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vw;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
 }
 
-.read-the-docs {
-  color: #888;
+.article-card {
+  width: calc(50% - 2vw);
+  margin-bottom: 2vw;
+  box-sizing: border-box;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+}
+
+.article-card .card-header {
+  flex-shrink: 0;
+  background-color: #f0f0f0;
+  padding: 1vw;
+  border-bottom: 1px solid none;
+  font-size: 1.2vw;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-align: center;
+}
+
+.article-card .card-body {
+  flex-grow: 1;
+  padding: 1vw;
+  font-size: 1vw;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.mainText {
+  margin-top: 1%;
+  margin-bottom: 2%;
+  text-align: center;
+  font-size: 2.5vw;
+}
+
+.cardButton {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  font-size: 0.9vw;
+      margin-top: auto;
+}
+.cardButton:hover {
+  color: #666; /* Almost black on hover */
 }
