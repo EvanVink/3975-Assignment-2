@@ -1,10 +1,13 @@
 //! This file is for Routing
 
 import { createBrowserRouter } from "react-router-dom";
-import UnauthorizedPage from "../pages/401Page";
 import ArticleListPage from "../pages/ArticleListPage";
+import ArticleDetailPage from "../pages/ArticleDetailPage";
 import App from "../App";
 
+/**
+ * Define the application's routes.
+ */
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -16,10 +19,10 @@ export const router = createBrowserRouter([
         element: <ArticleListPage />
       },
       {
-        //! Add a new route for the 401 page
-        path: "/401",
-        element: <UnauthorizedPage />
-      },
+        //! Add a new route for the article detail page.
+        path: "/:id",
+        element: <ArticleDetailPage />
+      }
     ],
   },
 ]);

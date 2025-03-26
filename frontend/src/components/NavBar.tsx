@@ -1,48 +1,42 @@
 import { Link } from "react-router-dom";
+import Config from '../config/index';
 
-//Defining a specific type for component props in NavBar function.
-type NavBarArgument = {
-  isLoggedIn?: boolean;
-}
 
-//isLoggedin is set to false by default
-export default function NavBar({ isLoggedIn = false }: NavBarArgument) {
-  return (
-    <header>
-      <nav className="navbar">
-        <div className="nav-container">
+const LARAVEL_LOGIN_URL = `${Config.API_BASE_URL}/login`;
+const LARAVEL_SIGNUP_URL = `${Config.API_BASE_URL}/register`;
 
-          <Link className="navbar-brand" to="/">
-            <span className="blog-title">THE BLOG</span>
-          </Link>
+/**
+ * NavBar component renders the navigation bar with links to the homepage,
+ * articles, login, and signup pages. The login and signup links point to
+ * external Laravel backend URLs.
+ * 
+ * @returns The rendered navigation bar
+ */
+const NavBar = () => {
+  return(
 
-          <ul className="nav-menu">
-            <li>
-              <Link to="/">Articles</Link>
-            </li>
-            
-            //!Not sure if i need to get API call from backend to check if user is logged in
-            {isLoggedIn && (
-              <li>
-                <Link to="/create-article">Create Article</Link>
-              </li>
-            )}
+    <nav className="navbar">
+      <div className="nav-container">
+        <Link className="navbar-brand" to="/">
+          <span className="blog-title">THE BLOG</span>
+        </Link>
 
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
+        <ul className="nav-menu">
+          <li>
+            <Link to="/">Articles</Link>
+          </li>
+          <li>
+            <a href={LARAVEL_LOGIN_URL}>Login</a>
+          </li>
+          <li>
+            <a href={LARAVEL_SIGNUP_URL}>Sign Up</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
-          </ul>
-
-        </div>
-      </nav>
-    </header>
   );
-}
+};
+
+export default NavBar;
+

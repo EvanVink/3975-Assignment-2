@@ -9,3 +9,7 @@ export interface Article {
     EndDate: string;
     ContributorUsername: string;
 }
+
+export interface ArticleDetailProperty {
+    articleId: number;
+}

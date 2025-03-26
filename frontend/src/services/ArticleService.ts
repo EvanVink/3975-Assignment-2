@@ -14,15 +14,15 @@ export const fetchArticles = {
 
         try {
 
+            //Sending GET request to API to fetch all articles.
             const response = await fetch(`${Config.API_BASE_URL}/article`);
             
             if(!response.ok) {
                 throw new Error(`Failed to fetch articles (Check ArticleService.ts) ${response.status}`);
             }
 
-            
+            //Parsing the response body as JSON (list of articles) and return it.
             const data = await response.json();
-            console.log(`Successfully fetched ${Array.isArray(data) ? data.length : 0} articles`);
             return data;
 
         } catch (error) {
@@ -41,7 +41,7 @@ export const fetchArticles = {
     getArticleById: async (articleId: number): Promise<Article> => {
 
         try {
-
+            //Sending GET request to API to fetch an article by its ID
             const response = await fetch (`${Config.API_BASE_URL}/article/${articleId}`);
     
             if (!response.ok) {
@@ -53,6 +53,8 @@ export const fetchArticles = {
         } catch (error) {
             console.error(`Error fetching article by article Id (try failed in ArticleSevice)`, error);
             throw error;
+             //Return an empty object cast as Article.
+            return {} as Article;
         }
     }
 };  
