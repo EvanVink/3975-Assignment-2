@@ -12,12 +12,17 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::all();
+        $articles = Article::all();
+        return response()->json($articles)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
     }
+
     // $articles = Article::all();  // Fetch all articles from the database
-        // return view('index', compact('articles'));  // Pass articles to the Blade view
-    
-    
+    // return view('index', compact('articles'));  // Pass articles to the Blade view
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -48,15 +53,15 @@ class ArticleController extends Controller
 
     // }
     public function store(Request $request)
-{
-    $request->validate([
-        'Title' => 'required',
-        'Body' => 'required',
-        'CreateDate' => 'required|date',
-        'StartDate' => 'required|date',
-        'EndDate' => 'required|date',
-        'ContributorUsername' => 'required'
-    ]);
+    {
+        $request->validate([
+            'Title' => 'required',
+            'Body' => 'required',
+            'CreateDate' => 'required|date',
+            'StartDate' => 'required|date',
+            'EndDate' => 'required|date',
+            'ContributorUsername' => 'required'
+        ]);
 
         Article::create([
             'ArticleId' => request('ArticleId'),
@@ -67,8 +72,6 @@ class ArticleController extends Controller
             'EndDate' => request('EndDate'),
             'ContributorUsername' => request('ContributorUsername')
         ]);
-
-
     }
 
     /**
@@ -76,9 +79,21 @@ class ArticleController extends Controller
      */
     public function show($ArticleId)
     {
-        return Article::find($ArticleId);
+        $article = Article::find($ArticleId);
+
+        if (!$article) {
+            return response()->json(['message' => 'Article not found'], 404)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+        }
+
+        return response()->json($article)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
