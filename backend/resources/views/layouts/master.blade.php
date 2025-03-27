@@ -11,10 +11,10 @@
 <title>The Blog</title>
 </head>
 <body>
-    @include('partials.header')
+    @include('header')
     <div class="container">
         @yield('content')
         </div>
-    @include('partials.footer')
+    @include('footer')
 </body>
 </html>
