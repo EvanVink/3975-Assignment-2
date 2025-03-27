@@ -5,12 +5,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 
-// Route::resource('articles', ArticleController::class);
 
-
+//! For article list page
 Route::get('/', function () {
-    return view('index');
+    return redirect(config('app.recat_url'));
 });
+
+Route::get('/id', function () {
+    return redirect(config('app.recat_url'));
+});
+
 
 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
