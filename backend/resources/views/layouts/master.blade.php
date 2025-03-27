@@ -9,8 +9,8 @@
 <title>The Blog</title>
 </head>
 <body>
-    // uses laravels authentification to check if they are logged in, 
-    // if they are: display the navbar
+   <!-- Uses Laravel's authentication to check if they are logged in,
+         if they are: display the navbar -->
     @if(Auth::check()) 
     @include('layouts.navBar')
     @endif
