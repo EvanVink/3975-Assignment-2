@@ -5,14 +5,47 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 
 
-//! For article list page
-Route::get('/', function () {
-    return redirect(config('app.recat_url'));
-});
+Route::get('/view.articles', function () {
+    return redirect(config('app.react_url'));
+})->name('view.articles');
 
 Route::get('/id', function () {
     return redirect(config('app.recat_url'));
 });
+
+Route::get('/', function() {
+    return view('welcome', ['showHeader' => false]);
+});
+
+
+// Public routes==================================
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::get('/view-articles', function () {
+//     return redirect(config('app.react_url'));
+// })->name('view.articles');
+
+// // Admin routes
+// Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+//     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+//     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+//     // Other admin routes...
+// });
+
+// // User routes
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+//     // Other user routes...
+// });
+// Public routes==================================
+
+
+
+
+
+
 
 
 

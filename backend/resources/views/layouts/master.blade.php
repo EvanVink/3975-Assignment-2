@@ -11,10 +11,16 @@
 <title>The Blog</title>
 </head>
 <body>
-    @include('header')
+    
+    <!-- if $showHeader is true, display header as well (Using in routes/web.php)-->
+    @if ($showHeader ?? true)
+        @include('layouts.header')
+     @endif
+
     <div class="container">
         @yield('content')
-        </div>
-    @include('footer')
+    </div>
+
+    @include('layouts.footer')
 </body>
 </html>
