@@ -12,12 +12,12 @@ class UserController extends Controller
 {
     public function showLoginForm()
     {
-        return view('auth.login');
+        return view('common.login');
     }
 
     public function showRegisterForm()
     {
-        return view('auth.register');
+        return view('common.register');
     }
 
 
@@ -33,7 +33,7 @@ class UserController extends Controller
 
         if ($user && Hash::check($request->password, $user->password)) {
             
-            if ($user->is_approved) { // Assuming `is_approved` exists in your `users` table
+            if ($user->isApproved) {
                 Auth::login($user);
                 Session::put('userName', $user->email);
                 Session::put('role', $user->role);
@@ -77,15 +77,15 @@ class UserController extends Controller
 
         // Create user and hash password
         $user = User::create([
-            'first_name' => $validated['firstName'],
-            'last_name' => $validated['lastName'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'role' => 'contributor', 
-            'is_approved' => 0
+            'Username' => $validated['email'], // Use email as the Username
+            'Password' => Hash::make($validated['password']),
+            'FirstName' => $validated['firstName'],
+            'LastName' => $validated['lastName'],
+            'RegistrationDate' => now()->toDateString(), // Stores only the date
+            'isApproved' => 0, // Assuming default is 0 for pending approval
+            'Role' => 'contributor', // Default role
         ]);
-
         // Redirect to pending page
-        return redirect()->route('pending');
+        return redirect()->route('/pending');
     }
 }

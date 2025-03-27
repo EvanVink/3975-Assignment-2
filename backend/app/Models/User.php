@@ -9,7 +9,7 @@ class User extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'users'; // Ensures Laravel uses the correct table
+    protected $table = 'Users'; // Ensures Laravel uses the correct table
 
     public $timestamps = false; // Disables created_at and updated_at
 
@@ -18,7 +18,7 @@ class User extends Authenticatable
         'Password',
         'FirstName',
         'LastName',
-        'Registration',
+        'RegistrationDate',
         'isApproved',
         'Role'
     ];

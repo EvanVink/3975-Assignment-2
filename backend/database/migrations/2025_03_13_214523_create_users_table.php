@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Password');
             $table->string('FirstName');
             $table->string('LastName');
-            $table->date('Registration');
+            $table->date('RegistrationDate');
             $table->boolean('isApproved');
             $table->string('Role');
             $table->timestamps();
