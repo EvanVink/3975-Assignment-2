@@ -5,15 +5,34 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 
+//Redirects route to the React frontend URL defined in config/app.php.
+Route::get('/articles', function () {
+    return redirect(config('app.react_url'));
+})->name('articles');
 
-//! For article list page
-Route::get('/', function () {
-    return redirect(config('app.recat_url'));
-});
+//Renders 'welcome' Blade(Landing page) view and hides the header.
+Route::get('/', function() {
+    return view('welcome', ['showHeader' => false]);
+})->name('landing');
 
-Route::get('/id', function () {
-    return redirect(config('app.recat_url'));
-});
+//Renders unauthorized(401 error) page and hides the header.
+Route::get('/unauthorized', function() {
+    return view('users.401', ['showHeader' => false]);
+})->name('unauthorized');
+
+//! Potentailly might use for nav bar
+// // Admin routes
+// Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+//     Route::get('/adminPage', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+//     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+// });
+
+// // User routes
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+// });
+
+
 
 
 

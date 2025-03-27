@@ -1,6 +1,13 @@
 @extends('layouts.master')
 
 @section('content')
+
+<div class="logo_container_login_signup">
+    <a href="{{ url('/') }}">
+        <img src="{{ asset('images/logo.jpg') }}" alt="Blog Logo" class="logo_img">
+    </a>
+</div>
+
 <div class="login-wrapper">
     <h1 class="login_h1">Welcome Back!</h1>
 
@@ -19,10 +26,12 @@
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" required value="{{ old('email') }}">
             </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
+
             <div class="login_btn_container">
                 <button type="submit" class="btn btn-secondary login_login_btn">Submit</button>
                 <span class="txt_space">or</span>
@@ -30,5 +39,7 @@
             </div>
         </form>
     </div>
+
 </div>
+
 @endsection

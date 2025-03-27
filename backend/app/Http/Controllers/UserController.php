@@ -12,12 +12,12 @@ class UserController extends Controller
 {
     public function showLoginForm()
     {
-        return view('common.login');
+        return view('common.login', ['showHeader' => false]);
     }
 
     public function showRegisterForm()
     {
-        return view('common.register');
+        return view('common.register', ['showHeader' => false]);
     }
 
 

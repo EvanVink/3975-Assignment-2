@@ -126,5 +126,5 @@ return [
     /**
      * Adding React URL to the configuration.
      */
-    'react_url' => env('REACT_APP_URL', 'http://http://localhost:5173'),
+    'react_url' => env('REACT_APP_URL', 'http://localhost:5173'),
 ];

@@ -9,14 +9,16 @@
 <title>The Blog</title>
 </head>
 <body>
-   <!-- Uses Laravel's authentication to check if they are logged in,
-         if they are: display the navbar -->
+    
+    {{-- uses laravels authentification to check if they are logged in, if they are: display the navbar --}}
     @if(Auth::check()) 
-    @include('layouts.navBar')
+        @include('layouts.navBar')
     @endif
+
     <div class="container">
         @yield('content')
-        </div>
+    </div>
+
     @include('layouts.footer')
 </body>
 </html>
