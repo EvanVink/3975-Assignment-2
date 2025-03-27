@@ -1,49 +1,36 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 
-
-Route::get('/view.articles', function () {
+//Redirects route to the React frontend URL defined in config/app.php.
+Route::get('/articles', function () {
     return redirect(config('app.react_url'));
-})->name('view.articles');
+})->name('articles');
 
-Route::get('/id', function () {
-    return redirect(config('app.recat_url'));
-});
-
+//Renders 'welcome' Blade(Landing page) view and hides the header.
 Route::get('/', function() {
     return view('welcome', ['showHeader' => false]);
-});
+})->name('landing');
 
+//Renders unauthorized(401 error) page and hides the header.
+Route::get('/unauthorized', function() {
+    return view('users.401', ['showHeader' => false]);
+})->name('unauthorized');
 
-// Public routes==================================
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// Route::get('/view-articles', function () {
-//     return redirect(config('app.react_url'));
-// })->name('view.articles');
-
+//! Potentailly might use for nav bar
 // // Admin routes
 // Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-//     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+//     Route::get('/adminPage', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 //     Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
-//     // Other admin routes...
 // });
 
 // // User routes
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
-//     // Other user routes...
 // });
-// Public routes==================================
-
-
-
-
 
 
 
@@ -51,11 +38,12 @@ Route::get('/', function() {
 
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
-Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register.show');
 Route::post('/register', [UserController::class, 'register'])->name('register');
+Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
 Route::get('/pending', function () {
-    return view('auth.pending');
+    return view('users.pending');
 });
 
 

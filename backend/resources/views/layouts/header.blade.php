@@ -35,7 +35,7 @@
                     @if(Auth::user()->role == 'admin')
 
                         <li><a href="{{ route('admin.users') }}">User List</a></li>
-                        <li><a href="{{ route('view.articles') }}">Articles</a></li>
+                        <li><a href="{{ route('articles') }}">Articles</a></li>
                         <li><a href="{{ route('articles.create') }}">Create Article</a></li>
                         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                         <li>
@@ -50,7 +50,7 @@
                     {{-- For logged-in user --}}
                     @else
 
-                        <li><a href="{{ route('view.articles') }}">Articles</a></li>
+                        <li><a href="{{ route('articles') }}">Articles</a></li>
                         <li><a href="{{ route('articles.create') }}">Create Article</a></li>
                         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                         <li>
@@ -67,7 +67,7 @@
                 {{-- For public side (Non logged-in user and admin) --}}
                 @else
 
-                    <li><a href="{{ route('view.articles') }}">Articles</a></li>
+                    <li><a href="{{ route('articles') }}">Articles</a></li>
                     <li><a href="{{ route('login') }}">Login</a></li>
                     <li><a href="{{ route('register') }}">Sign Up</a></li>
 
