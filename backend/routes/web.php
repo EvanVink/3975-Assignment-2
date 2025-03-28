@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Models\User;
+use App\Models\Article;
 
 //Redirects route to the React frontend URL defined in config/app.php.
 Route::get('/articles', function () {
@@ -33,14 +36,29 @@ Route::get('/unauthorized', function() {
 // });
 
 
-
-
-
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [UserController::class, 'login']);
 Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register.show');
 Route::post('/register', [UserController::class, 'register'])->name('register');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
+
+// Route::middleware(['auth', 'admin'])->group(function () {
+    // Route for updating the user approval status via form submission
+    Route::post('/admin/update/status', [AdminController::class, 'updateUserStatus'])->name('updateUserStatus');
+// });
+
+Route::get('/dashboard', function () {
+    //passing this users variable to the view so that the admin page can display all the users
+    $users = User::all();
+    return view('admin.adminPage', ['users' => $users]);
+});
+
+
+
+Route::get('/profile', function () {
+    $articles = Article::all();
+    return view('common.profile', ['articles' => $articles]);
+});
 
 Route::get('/pending', function () {
     return view('users.pending');
