@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -10,14 +11,19 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
+   // In ArticleController.php
     public function index()
     {
-        $articles = Article::all();
-        return response()->json($articles)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+        // Fetch the authenticated user
+        $user = Auth::user();
+
+        // Fetch articles where ContributorUsername matches the logged-in user's username
+        $articles = Article::where('ContributorUsername', $user->Username)->get();
+
+        //passing the user and the articles to the view
+        return view('users.index', ['articles' => $articles, 'user' => $user]);
     }
+
 
     // $articles = Article::all();  // Fetch all articles from the database
     // return view('index', compact('articles'));  // Pass articles to the Blade view
@@ -79,19 +85,18 @@ class ArticleController extends Controller
      */
     public function show($ArticleId)
     {
-        $article = Article::find($ArticleId);
 
+        $article = Article::where('ArticleId', $ArticleId)
+        //this join line helps pass the contribuotr's first and last name to the article
+            ->join('Users', 'Article.ContributorUsername', '=', 'Users.Username')
+            ->select('Article.Title', 'Article.Body', 'Article.StartDate', 'Users.FirstName', 'Users.LastName')
+            ->first();
+        
         if (!$article) {
-            return response()->json(['message' => 'Article not found'], 404)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+            abort(404, 'Article not found');
         }
-
-        return response()->json($article)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+    
+        return view('users.showArticle', compact('article'));
     }
 
 
@@ -100,7 +105,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        $article = Article::findOrFail($id);
+        return view('users.edit_article', compact('article'));
     }
 
     /**
@@ -116,6 +122,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->delete();
+        return redirect("/profile")->with('success', 'Article deleted successfully.');
     }
 }

@@ -54,7 +54,7 @@
                                 </td>
                                 <td>
                                     <button class="btn btn-outline-warning" type="button">
-                                        <a class="link-button-view dashboard-link" href="{{ route('view.article', ['id' => $article->ArticleId]) }}">View</a>
+                                        <a class="link-button-view dashboard-link" href="{{ route('show.article', ['id' => $article->ArticleId]) }}">View</a>
                                     </button>
                                 </td>
                             </tr>

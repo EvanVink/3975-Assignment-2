@@ -19,4 +19,8 @@ class Article extends Model
         'EndDate',
         'ContributorUsername'
         ];
+
+        public function contributor() {
+            return $this->belongsTo(User::class, 'ContributorUsername', 'Username');
+        }
 }

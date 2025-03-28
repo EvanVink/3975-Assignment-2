@@ -45,7 +45,7 @@ class UserController extends Controller
                 if ($user->Role === 'admin') {
                     return redirect('/dashboard');
                 } else {
-                    return redirect('/profile');
+                    return redirect('/index');
                 }
                 
             } else {
