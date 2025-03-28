@@ -29,18 +29,25 @@ class UserController extends Controller
         ]);
 
         // Retrieve user by email
-        $user = User::where('Username', $request->Username)->first();
+        $user = User::where('Username', $request->email)->first();
+        $password = User::where('Password', $request->password)->first();
 
-        if ($user && Hash::check($request->Password, $user->Password)) {
+        
+        if ($user && Hash::check($request->password, $user->Password)) {
             
-            if ($user->isApproved) {
+            if ($user->IsApproved === 1) {
                 Auth::login($user);
-                Session::put('userName', $user->Username);
-                Session::put('role', $user->role);
+                Session::put('userName', $user->email);
+                Session::put('role', $user->Role);
                 Session::put('name', $user->first_name . " " . $user->last_name);
-
-                // Redirect based on role
-                return ($user->role === 'admin') ? redirect('/admin/dashboard') : redirect('/');
+                
+                
+                if ($user->Role === 'admin') {
+                    return redirect('/dashboard');
+                } else {
+                    return redirect('/index');
+                }
+                
             } else {
                 return redirect('/pending');
             }

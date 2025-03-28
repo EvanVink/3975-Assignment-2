@@ -11,9 +11,9 @@
 <body>
     
     {{-- uses laravels authentification to check if they are logged in, if they are: display the navbar --}}
-    @if(Auth::check()) 
+    {{-- @if(Auth::check()) 
         @include('layouts.navBar')
-    @endif
+    @endif --}}
 
     <div class="container">
         @yield('content')

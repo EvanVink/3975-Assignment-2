@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use App\Models\User;
+use App\Models\Article;
 
 //Redirects route to the React frontend URL defined in config/app.php.
 Route::get('/articles', function () {

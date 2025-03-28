@@ -547,3 +547,155 @@ textarea.form-control {
     height: 100%;
     line-height: 30px;
 }
+
+.article-h1{
+    font-size: clamp(30px, 5vw, 50px);
+    margin-top: 80px;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.articles-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.articles-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2vw;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+}
+
+.article-card {
+    width: calc(70% - 1vw);
+    margin-bottom: 2vw;
+    box-sizing: border-box;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.article-card .card-header {
+    flex-shrink: 0;
+    background-color: #f0f0f0;
+    padding: 1vw;
+    border-bottom: 1px solid none;
+    font-size: 1.2vw;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-align: center;
+}
+
+.article-card .card-body {
+    flex-grow: 1;
+    padding: 1vw;
+    font-size: 1vw;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.mainText {
+    margin-top: 1%;
+    margin-bottom: 2%;
+    text-align: center;
+    font-size: 2.5vw;
+}
+
+
+.cardButton {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.admin-table-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+
+/* Alert Styles */
+.admin-alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.admin-alert-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.admin-alert-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Table Styles */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-th, .admin-td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-th {
+    background-color: #7b8086;
+    color: white;
+}
+
+.admin-tr:hover {
+    background-color: #f1f1f1;
+}
+
+
+.admin-approve-btn {
+    width: clamp(60px, 15vw, 80px);
+    height: clamp(25px, 4vh, 30px);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+}
+
+.admin-approve-btn:hover {
+    background-color: #218838;
+}
+
+.admin-disapprove-btn {
+    width: clamp(50px, 15vw, 90px);
+    height: clamp(25px, 4vh, 30px);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+}
+
+.admin-disapprove-btn:hover {
+    background-color: #c82333;
+}
