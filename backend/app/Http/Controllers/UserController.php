@@ -24,18 +24,18 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'Username' => 'required|string',
+            'Password' => 'required',
         ]);
 
         // Retrieve user by email
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('Username', $request->Username)->first();
 
-        if ($user && Hash::check($request->password, $user->password)) {
+        if ($user && Hash::check($request->Password, $user->Password)) {
             
             if ($user->isApproved) {
                 Auth::login($user);
-                Session::put('userName', $user->email);
+                Session::put('userName', $user->Username);
                 Session::put('role', $user->role);
                 Session::put('name', $user->first_name . " " . $user->last_name);
 
