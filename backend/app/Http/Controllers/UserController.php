@@ -24,13 +24,12 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|string',
             'password' => 'required',
         ]);
 
         // Retrieve user by email
         $user = User::where('Username', $request->email)->first();
-        $password = User::where('Password', $request->password)->first();
 
         
         if ($user && Hash::check($request->password, $user->Password)) {
@@ -93,6 +92,6 @@ class UserController extends Controller
             'Role' => 'contributor', // Default role
         ]);
         // Redirect to pending page
-        return redirect()->route('/pending');
+        return redirect('/pending');
     }
 }
