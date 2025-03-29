@@ -6172,8 +6172,6 @@
             "time": "2020-07-09T08:09:16+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "jean85/pretty-package-versions",
             "version": "2.1.1",
             "source": {
@@ -6234,7 +6232,6 @@
             "time": "2025-03-19T14:43:43+00:00"
         },
         {
->>>>>>> d9e4e94d2d5549a269cb6702b9d87fffd5f1adf2
             "name": "laravel/breeze",
             "version": "v2.3.6",
             "source": {
