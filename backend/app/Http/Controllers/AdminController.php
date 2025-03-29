@@ -11,32 +11,27 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // Checking if the user is logged in
-        if (!Auth::check()) {
-            return redirect('/unauthorized');
-        }
-
         // Checking if the user is an admin
-        if (User::user()->role !== 'admin') {
+        if (Auth::user()->Role !== 'admin') {
             return redirect('/unauthorized');
         }
 
+
+        $users = User::all();
+
         
-        
-        return view('admin.adminPage');
+        return view('admin.adminPage', compact('users'));
     }
 
     public function updateUserStatus(Request $request)
     {
-        $user = User::where('Username', $request->Username)->first(); // Get user by username
-
-        if ($user) {
-            $user->IsApproved = $request->IsApproved; // Update approval status
-            $user->update(); // Save the updated user
-            // dd($user);
-            return redirect("/dashboard")->with('success', 'User status updated successfully.');
+        $updated = User::where('Username', $request->Username)
+        ->update(['IsApproved' => (bool)$request->IsApproved]);
+    
+        if ($updated) {
+            return redirect("/admin")->with('success', 'User status updated successfully.');
         }
-
-        return redirect("/dashboard")->with('error', 'User not found.');
+    
+        return redirect("/admin")->with('error', 'User not found or status unchanged.');
     }
 }
