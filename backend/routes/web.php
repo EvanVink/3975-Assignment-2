@@ -28,6 +28,9 @@ Route::get('/unauthorized', function () {
     return view('users.401', ['showHeader' => false]);
 })->name('unauthorized');
 
+// $articles = Article::all();
+//     return view('common.profile', ['articles' => $articles]);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
