@@ -40,9 +40,8 @@ class UserController extends Controller
                 Session::put('role', $user->Role);
                 Session::put('name', $user->first_name . " " . $user->last_name);
                 
-                
                 if ($user->Role === 'admin') {
-                    return redirect('/dashboard');
+                    return redirect('/admin');
                 } else {
                     return redirect('/index');
                 }
