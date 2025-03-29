@@ -12,17 +12,14 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
    // In ArticleController.php
-    public function index()
-    {
-        // Fetch the authenticated user
-        $user = Auth::user();
-
-        // Fetch articles where ContributorUsername matches the logged-in user's username
-        $articles = Article::where('ContributorUsername', $user->Username)->get();
-
-        //passing the user and the articles to the view
-        return view('users.index', ['articles' => $articles, 'user' => $user]);
+    public function index() {
+    try {
+        $articles = Article::all();
+        return response()->json($articles);
+    } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()], 500);
     }
+}
 
 
     // $articles = Article::all();  // Fetch all articles from the database
@@ -86,17 +83,12 @@ class ArticleController extends Controller
     public function show($ArticleId)
     {
 
-        $article = Article::where('ArticleId', $ArticleId)
-        //this join line helps pass the contribuotr's first and last name to the article
-            ->join('Users', 'Article.ContributorUsername', '=', 'Users.Username')
-            ->select('Article.Title', 'Article.Body', 'Article.StartDate', 'Users.FirstName', 'Users.LastName')
-            ->first();
-        
-        if (!$article) {
-            abort(404, 'Article not found');
+        try {
+            $article = Article::find($ArticleId);
+            return response()->json($article);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-    
-        return view('users.showArticle', compact('article'));
     }
 
 

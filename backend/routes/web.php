@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+require __DIR__ . '/auth.php';
 
 
 // // Route::middleware(['auth', 'admin'])->group(function () {
@@ -68,6 +69,8 @@ Route::middleware('auth')->group(function () {
 Route::get('article', [ArticleController::class, 'index']);
 Route::get('article/{ArticleId}', [ArticleController::class, 'show']);
 
+
+
 Route::middleware('auth')->group(function () {
 
 
@@ -75,7 +78,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
     Route::get('/article/show/{id}', [ArticleController::class, 'show'])->name('show.article');
-    Route::get('/index', [ArticleController::class, 'index']);
+    
 
 
     Route::get('/editArticle', function () {
@@ -83,16 +86,21 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::get('/pending', function () {
-        return view('users.pending');
-    });
+    
 });
 
+Route::get('/pending', function () {
+    return view('users.pending');
+})->name('pending');
+
+
 Route::middleware('guest')->group(function () {
+    Route::get('/index', [ArticleController::class, 'index']);
     Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [UserController::class, 'login']);
     Route::get('/register', [UserController::class, 'showRegisterForm'])->name('register.show');
     Route::post('/register', [UserController::class, 'register'])->name('register');
 });
 
-require __DIR__ . '/auth.php';
+
+
