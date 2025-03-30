@@ -22,63 +22,48 @@ class ArticleController extends Controller
 }
 
 
-    // $articles = Article::all();  // Fetch all articles from the database
-    // return view('index', compact('articles'));  // Pass articles to the Blade view
-
+    /**
+     * Show the form for creating a new article.
+     */
+    public function create()
+    {
+        // Set Vancouver timezone and current date
+        date_default_timezone_set('America/Vancouver');
+        $currentDate = date('Y-m-d');
+        
+        return view('users.createArticle', [
+            'currentDate' => $currentDate
+        ]);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     request()->validate([
-    //         'ArticleId' => 'required',
-    //         'Title' => 'required',
-    //         'Body' => 'required',
-    //         'CreateDate' => 'required',
-    //         'StartDate' => 'required',
-    //         'EndDate' => 'required',
-    //         'ContributorUsername' => 'required'
-    //     ]);
-
-    //     Article::create([
-    //         'ArticleId' => request('ArticleId'),
-    //         'Title' => request('Title'),
-    //         'Body' => request('Body'),
-    //         'CreateDate' => request('CreateDate'),
-    //         'StartDate' => request('StartDate'),
-    //         'EndDate' => request('EndDate'),
-    //         'ContributorUsername' => request('ContributorUsername')
-
-
-    //     ]);
-
-
-    // }
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
-            'Title' => 'required',
-            'Body' => 'required',
-            'CreateDate' => 'required|date',
-            'StartDate' => 'required|date',
-            'EndDate' => 'required|date',
-            'ContributorUsername' => 'required'
+            'title' => 'required',
+            'body' => 'required',
+            'startDate' => 'required|date',
+            'endDate' => 'required|date|after_or_equal:startDate',
         ]);
-
+    
+        // Get the next ArticleId
+        $maxId = Article::max('ArticleId') ?? 0;
+        $nextId = $maxId + 1;
+    
         Article::create([
-            'ArticleId' => request('ArticleId'),
-            'Title' => request('Title'),
-            'Body' => request('Body'),
-            'CreateDate' => request('CreateDate'),
-            'StartDate' => request('StartDate'),
-            'EndDate' => request('EndDate'),
-            'ContributorUsername' => request('ContributorUsername')
+            'ArticleId' => $nextId,
+            'Title' => $request->title,
+            'Body' => $request->body,
+            'CreateDate' => date('Y-m-d'),
+            'StartDate' => $request->startDate,
+            'EndDate' => $request->endDate,
+            'ContributorUsername' => Auth::user()->Username  // Changed from session('userName')
         ]);
-
-        return redirect("/profile")->with('success', 'Article created successfully.');
+    
+        return redirect('/profile')->with('success', 'Article created successfully.');
     }
-
     /**
      * Display the specified resource.
      */

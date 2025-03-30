@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Article extends Model
-{
+{   
     use HasFactory;
     protected $table = 'Article';
     protected $primaryKey = "ArticleId";
+    public $timestamps = false;
     protected $fillable = [
         'ArticleId',
         'Title',
