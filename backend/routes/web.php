@@ -9,12 +9,6 @@ use App\Http\Controllers\AdminController;
 use App\Models\User;
 use App\Models\Article;
 
-// API routes for React frontend. No middleware, so publicly accessible
-Route::get('/article', [ArticleController::class, 'index']);
-Route::get('/article/{ArticleId}', [ArticleController::class, 'show']);
-
-
-
 
 Route::get('/articles', function () {
     return redirect(config('app.react_url'));
@@ -22,7 +16,7 @@ Route::get('/articles', function () {
 
 Route::get('/', function () {
     return view('welcome', ['showHeader' => false]);
-})->name('landing');
+})->name('welcome');
 
 Route::get('/unauthorized', function () {
     return view('users.401', ['showHeader' => false]);

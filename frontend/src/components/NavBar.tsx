@@ -13,14 +13,14 @@ const LARAVEL_SIGNUP_URL = `${Config.API_BASE_URL}/register`;
  * @returns The rendered navigation bar
  */
 const NavBar = () => {
-  return(
 
+    // If no session, show login/signup links
+    return (
     <nav className="navbar">
       <div className="nav-container">
         <Link className="navbar-brand" to="/">
           <span className="blog-title">THE BLOG</span>
         </Link>
-
         <ul className="nav-menu">
           <li>
             <Link to="/">Articles</Link>
@@ -34,9 +34,8 @@ const NavBar = () => {
         </ul>
       </div>
     </nav>
-
   );
+
 };
 
 export default NavBar;
-
