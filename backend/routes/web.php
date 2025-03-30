@@ -28,11 +28,10 @@ Route::get('/unauthorized', function () {
     return view('users.401', ['showHeader' => false]);
 })->name('unauthorized');
 
-// $articles = Article::all();
-//     return view('common.profile', ['articles' => $articles]);
-
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $articles = Article::all();
+    $user = Auth::user();
+    return view('dashboard', ['articles' => $articles, 'user' => $user]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
