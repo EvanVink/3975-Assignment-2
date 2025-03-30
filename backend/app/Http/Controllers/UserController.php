@@ -43,7 +43,7 @@ class UserController extends Controller
                 if ($user->Role === 'admin') {
                     return redirect('/admin');
                 } else {
-                    return redirect('/index');
+                    return redirect('/articles');
                 }
                 
             } else {
@@ -53,6 +53,8 @@ class UserController extends Controller
             return back()->withErrors(['email' => 'Invalid email or password.']);
         }
     }
+
+    
 
 
     public function logout()
