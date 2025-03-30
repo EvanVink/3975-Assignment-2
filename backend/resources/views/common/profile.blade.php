@@ -41,17 +41,17 @@
                             <td>{{ $str }}...</td>
                             <td>
                                 <button class='btn btn-outline-primary' type='button'>
-                                    <a class='link-button-edit dashboard-link' href="{{ route('articles.edit', $article->ArticleId) }}">Edit</a>
+                                    <a class='link-button-edit dashboard-link' href="{{ route('edit.article', $article->ArticleId) }}">Edit</a>
                                 </button>
                             </td>
                             <td>
                                 <button class='btn btn-outline-danger' type='button'>
-                                    <a class='link-button-delete dashboard-link' href="{{ route('articles.delete', $article->ArticleId) }}">Delete</a>
+                                    <a class='link-button-delete dashboard-link' href="{{ route('remove.article', $article->ArticleId) }}">Delete</a>
                                 </button>
                             </td>
                             <td>
                                 <button class='btn btn-outline-warning' type='button'>
-                                    <a class='link-button-view dashboard-link' href="{{ route('articles.show', $article->ArticleId) }}">View</a>
+                                    <a class='link-button-view dashboard-link' href="{{ route('articles', $article->ArticleId) }}">View</a>
                                 </button>
                             </td>
                         </tr>
