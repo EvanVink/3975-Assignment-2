@@ -36,7 +36,7 @@ require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'get'])->name('profile.edit');
     Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
-    Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
+    Route::get('/article/remove/{id}', [ArticleController::class, 'destroy'])->name('remove.article');
     
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-    Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
+    
 
 
 
