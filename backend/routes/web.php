@@ -38,7 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
     
-    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::get('/create_article', [ArticleController::class, 'create'])->name('create_article');
     Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 
     Route::post('/updateUserStatus', [AdminController::class, 'updateUserStatus'])->name('updateUserStatus');

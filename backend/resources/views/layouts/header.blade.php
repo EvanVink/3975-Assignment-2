@@ -36,7 +36,7 @@
 
                         <li><a href="{{ route('admin') }}">User List</a></li>
                         <li><a href="{{ route('articles') }}">Articles</a></li>
-                        <li><a href="{{ route('articles.create') }}">Create Article</a></li>
+                        <li><a href="{{ route('create_article') }}">Create Article</a></li>
                         <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                         <li>
 
@@ -50,7 +50,7 @@
                 {{-- For logged-in user --}}
                 @else
                     <li><a href="{{ route('articles') }}">Articles</a></li>
-                    <li><a href="{{ route('articles.create') }}">Create Article</a></li>  <!-- FIXED: Changed from edit.article to articles.create -->
+                    <li><a href="{{ route('create_article') }}">Create Article</a></li>  <!-- FIXED: Changed from edit.article to articles.create -->
                     <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                     <li>
                         <form method="POST" action="{{ route('logout') }}">

@@ -1,13 +1,23 @@
-@extends('layouts.header')
+@extends('layouts.master')
 
 @section('content')
 <div class="createArticle-form-container">
-    <form method="POST" action="{{ route('article.store') }}">
+    <h2 class="mb-4">Create New Article</h2>
+    
+    @if ($errors->any())
+        <div class="alert alert-danger createArticle_error_container">
+            @foreach ($errors->all() as $error)
+                <div>{{ $error }}</div>
+            @endforeach
+        </div>
+    @endif
+    
+    <form method="POST" action="{{ route('articles.store') }}">
         @csrf
         <div class="email_date_container">
             <div class="mb-31 flex-1">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" value="{{ Session::get('userName') }}" readonly>
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" value="{{ Auth::user()->Username }}" readonly>
             </div>
             <div class="mb-31 flex-1">
                 <label for="createDate" class="form-label">Create Date</label>
@@ -37,8 +47,7 @@
         </div>
 
         <div class="createArticle_btn_container">
-            <button type="submit" class="btn btn-secondary createArticle_btn">Submit</button>
+            <button type="submit" class="btn btn-secondary createArticle_btn">Create Article</button>
         </div>
     </form>
 </div>
-@endsection
