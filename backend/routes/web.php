@@ -9,6 +9,10 @@ use App\Http\Controllers\AdminController;
 use App\Models\User;
 use App\Models\Article;
 
+// API routes for React frontend. No middleware, so publicly accessible
+Route::get('/article', [ArticleController::class, 'index']);
+Route::get('/article/{ArticleId}', [ArticleController::class, 'show']);
+
 
 Route::get('/articles', function () {
     return redirect(config('app.react_url'));
@@ -23,9 +27,7 @@ Route::get('/unauthorized', function () {
 })->name('unauthorized');
 
 Route::get('/dashboard', function () {
-    $articles = Article::all();
-    $user = Auth::user();
-    return view('dashboard', ['articles' => $articles, 'user' => $user]);
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -48,6 +50,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/editArticle', function () {
         return view('users.edit_article');
     });
+
+    Route::get('/pending', function () {
+        return view('users.pending');
+    })->name('pending');
+
 });
 // Guest routes
 Route::middleware('guest')->group(function () {
@@ -58,7 +65,4 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [UserController::class, 'register'])->name('register');
 });
 
-Route::get('/pending', function () {
-    return view('users.pending');
-})->name('pending');
 
