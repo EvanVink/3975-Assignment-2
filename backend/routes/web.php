@@ -23,7 +23,9 @@ Route::get('/unauthorized', function () {
 })->name('unauthorized');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $articles = Article::all();
+    $user = Auth::user();
+    return view('dashboard', ['articles' => $articles, 'user' => $user]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
