@@ -15,22 +15,23 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request)
+    public function get(Request $request)
     {
         $user = $request->user();
         
         // Add debugging
         try {
-            $articles = Article::where('ContributorUsername', $user->email)->get();
+            $articles = Article::where('ContributorUsername', $user->Username)->get();
             // dd($articles); // Uncomment to check what's returned
-            return view('common.profile', [
-                'user' => $user,
-                'articles' => $articles
-            ]);
+            return view('common.profile', compact('articles'));
         } catch (\Exception $e) {
             dd($e->getMessage()); // Display the error message
         }
     }
+
+    
+
+
 
     /**
      * Update the user's profile information.

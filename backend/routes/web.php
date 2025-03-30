@@ -19,6 +19,9 @@ Route::get('/articles', function () {
 })->name('articles');
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/profile');
+    }
     return view('welcome', ['showHeader' => false]);
 })->name('welcome');
 
@@ -26,15 +29,12 @@ Route::get('/unauthorized', function () {
     return view('users.401', ['showHeader' => false]);
 })->name('unauthorized');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 require __DIR__ . '/auth.php';
 // Authentication required routes
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'get'])->name('profile.edit');
     Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
     
