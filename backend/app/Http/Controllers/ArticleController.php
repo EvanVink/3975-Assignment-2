@@ -55,7 +55,7 @@ class ArticleController extends Controller
 
 
     // }
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $request->validate([
             'Title' => 'required',
@@ -75,6 +75,8 @@ class ArticleController extends Controller
             'EndDate' => request('EndDate'),
             'ContributorUsername' => request('ContributorUsername')
         ]);
+
+        return redirect("/profile")->with('success', 'Article created successfully.');
     }
 
     /**
@@ -106,7 +108,19 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $request->validate([
+            'Title' => 'required',
+            'Body' => 'required',
+            'CreateDate' => 'required|date',
+            'StartDate' => 'required|date',
+            'EndDate' => 'required|date',
+            'ContributorUsername' => 'required'
+        ]);
+
+
+
+        $article->update($request->all());
+        return redirect("/profile")->with('success', 'Article updated successfully.');
     }
 
     /**
