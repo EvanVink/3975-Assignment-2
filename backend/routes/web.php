@@ -39,22 +39,27 @@ require __DIR__ . '/auth.php';
 // Authentication required routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
+    Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
     
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+    Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+
     Route::post('/updateUserStatus', [AdminController::class, 'updateUserStatus'])->name('updateUserStatus');
     
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 
 
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
-    Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
 
+
+
     Route::get('/editArticle', function () {
-        return view('users.edit_article');
+        return view('edit_article');
     });
 });
+
 // Guest routes
 Route::middleware('guest')->group(function () {
     Route::get('/index', [ArticleController::class, 'index']);

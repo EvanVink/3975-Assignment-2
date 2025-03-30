@@ -15,7 +15,7 @@
     </div>
 
     <div class="pending_btn_container">
-        <a href="{{ url('landing') }}" class="btn btn-secondary pending_main_btn">Main Page</a>
+        <a href="{{ route('landing') }}" class="btn btn-secondary pending_main_btn">Main Page</a>
     </div>
 </body>
 @endsection
