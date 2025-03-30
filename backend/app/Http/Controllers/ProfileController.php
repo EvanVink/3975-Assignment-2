@@ -3,22 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Article;  // Added this import
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\View\View;
+use Illuminate\View\Views;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        $user = $request->user();
+        
+        // Add debugging
+        try {
+            $articles = Article::where('ContributorUsername', $user->email)->get();
+            // dd($articles); // Uncomment to check what's returned
+            return view('common.profile', [
+                'user' => $user,
+                'articles' => $articles
+            ]);
+        } catch (\Exception $e) {
+            dd($e->getMessage()); // Display the error message
+        }
     }
 
     /**
