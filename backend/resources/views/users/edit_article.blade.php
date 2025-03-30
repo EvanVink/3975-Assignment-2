@@ -1,6 +1,12 @@
 @extends('layouts.master')
 
 @section('content')
+    @php
+        //Setting Vancouver timezone and current date
+        date_default_timezone_set('America/Vancouver');
+        $currentDate = date('Y-m-d');
+    @endphp
+
     {{-- Display error messages if any --}}
     @if (!empty($error_messages))
         <div class="alert alert-danger createArticle_error_container">
@@ -19,9 +25,9 @@
                 <div class="email_date_container">
                     <div class="mb-31 flex-1">
                         <input type="hidden" name="Id" value="{{ $article->ArticleId }}">
-                        <label for="email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" 
-                            value="{{ Auth::user()->email }}" readonly>
+                        <label for="email" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="email" 
+                            value="{{ Auth::user()->Username }}" readonly>
                     </div>
                     <div class="mb-31 flex-1">
                         <label for="createDate" class="form-label">Create Date</label>

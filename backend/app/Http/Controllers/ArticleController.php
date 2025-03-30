@@ -79,34 +79,46 @@ class ArticleController extends Controller
     }
 
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
-    {
-        $article = Article::findOrFail($id);
-        return view('users.edit_article', compact('article'));
+{
+    $article = Article::where('ArticleId', $id)
+                     ->where('ContributorUsername', Auth::user()->Username)
+                     ->first();
+    
+    if (!$article) {
+        return redirect()->back()->with('error', 'Article not found or no permission to edit!');
     }
+    
+    date_default_timezone_set('America/Vancouver');
+    $currentDate = date('Y-m-d');
+    
+    return view('users.edit_article', [
+        'article' => $article,
+        'currentDate' => $currentDate
+    ]);
+}
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Article $article)
-    {
-        $request->validate([
-            'Title' => 'required',
-            'Body' => 'required',
-            'CreateDate' => 'required|date',
-            'StartDate' => 'required|date',
-            'EndDate' => 'required|date',
-            'ContributorUsername' => 'required'
-        ]);
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'title' => 'required',
+        'body' => 'required',
+        'startDate' => 'required|date',
+        'endDate' => 'required|date|after_or_equal:startDate',
+    ]);
 
+    $article = Article::where('ArticleId', $id)
+                     ->where('ContributorUsername', Auth::user()->Username)
+                     ->firstOrFail();
+    
+    $article->Title = $request->title;
+    $article->Body = $request->body;
+    $article->StartDate = $request->startDate;
+    $article->EndDate = $request->endDate;
+    $article->save();
 
-
-        $article->update($request->all());
-        return redirect("/profile")->with('success', 'Article updated successfully.');
-    }
+    return redirect('/profile')->with('success', 'Article updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.

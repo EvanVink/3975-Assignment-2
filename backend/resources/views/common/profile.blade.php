@@ -41,7 +41,7 @@
                             <td>{{ $str }}...</td>
                             <td>
                                 <button class='btn btn-outline-primary' type='button'>
-                                    <a class='link-button-edit dashboard-link' href="{{ route('edit.article', $article->ArticleId) }}">Edit</a>
+                                    <a class='link-button-edit dashboard-link' href="{{ route('articles.edit', $article->ArticleId) }}">Edit</a>
                                 </button>
                             </td>
                             <td>

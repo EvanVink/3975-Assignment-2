@@ -35,7 +35,8 @@ require __DIR__ . '/auth.php';
 // Authentication required routes
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'get'])->name('profile.edit');
-    Route::get('/article/edit/{id}', [ArticleController::class, 'edit'])->name('edit.article');
+    Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+    Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
     
     Route::get('/create_article', [ArticleController::class, 'create'])->name('create_article');
@@ -49,11 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/article/remove/{id}', [ArticleController::class, 'remove'])->name('remove.article');
 
-
-
-    Route::get('/editArticle', function () {
-        return view('edit_article');
-    });
 
     Route::get('/pending', function () {
         return view('users.pending');
